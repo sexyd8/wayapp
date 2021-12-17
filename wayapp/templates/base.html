@@ -1,0 +1,160 @@
+<!doctype html>
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title> Project | {% block title %}  {% endblock title %} </title>
+  </head>
+  <body class="projectbody">
+    <ul class="nav justify-content-center">
+      <li class="nav-item">
+        <a class="nav-link active"><i class="bi bi-envelope-fill"></i>Email us at: obidinge@gmail.com</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"><i class="bi bi-telephone-inbound-fill"></i>Call us at +234 (9011906426)</a>
+      </li>
+    </ul>
+  </div>
+      <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/icon.jpg' %}" width="25%"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">Moviez <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="{% url 'categories' %}">Packages</a>                
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'products' %}">All Movies</a>            
+            </li>
+            <li class="nav-item">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Subscribe</a>
+                <div class="dropdown-menu mt-2" style="background: powderblue;">
+                 {% if  member %}
+                  {% for  item  in member %}
+                    <a class="dropdown-item" href="{% url 'membership' item.id %}">{{item.title}}</a>  
+                  {% endfor %}
+                 {% endif %}
+                </div>
+              </li>                
+          </li>
+          {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'dashboard' %}">Dashboard <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'profile'  %}"><span class="text-danger font-weight-bold">{{request.user.username|title}}</span> Profile </a>              
+                </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logoutfunc' %}">Logout</a>              
+                  </li>
+          {% else %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'loginform' %}">Login</a>              
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'signupform' %}">Signup</a>              
+                </li>
+          {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <!-- header section done -->
+
+      <!-- alert messages -->      
+      {% if messages %}
+          {% for item in messages  %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+               {{item}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+          {% endfor %}      
+      {% endif %}
+      <!-- alert messages done -->
+        
+
+      <!-- banner section -->
+      {% block banner %}
+        
+      {% endblock banner %}
+      <!-- banner section done -->
+
+      <!-- content section -->
+    {% block content %} 
+    
+    {% endblock content %}
+    <!-- content section done -->
+    <!-- footer section -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-6">
+            <h6>About</h6>
+            <p class="text-justify">Moviez.com <i>RENTING MADE SIMPLE </i> is an initiative  to help the movie industryboost and simplify movie renting. Moviez focuses on providing comfort to her viewers notwithstanding thier membership packages.</p>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Categories</h6>
+            <ul class="footer-links">
+              <a href="">FOREIGN</a> <br>
+              <a href="">LOCAL</a> <br>
+              <a href="">LATEST</a> <br>
+            </ul>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <a href="">About Us</a> <br>
+              <a href="">Privacy Policy</a> <br>
+              <a href="">Sitemap</a> <br>
+            </ul>
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by 
+         <a href="#">Governor</a>.
+            </p>
+          </div>
+
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <a class="facebook" href="#"><i class="fa fa-facebook"></i></a> <br>
+              <a class="twitter" href="#"><i class="fa fa-twitter"></i></a> <br>
+              <a class="whatsapp" href="#"><i class="fa fa-whatsapp"></i></a> <br>
+              <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a> <br>
+            </ul>
+          </div>
+        </div>
+      </div>
+</footer>
+        
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

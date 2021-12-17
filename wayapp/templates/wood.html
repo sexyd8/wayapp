@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Member
+{% endblock title %}
+
+
+{% block content %}
+
+<!-- content section -->
+<div class="container-fluid" style="background-color: rgba(255, 160, 122, 0.322);">
+    <h1 class="text-center"> Wood Member</h1>
+    <ul class="list-unstyled">
+        <li class="nav-item dropdown"  style="list-style: none;">
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Upgrade
+            </a>
+            <div class="dropdown-menu mt-2"  style="background: powderblue;" aria-labelledby="navbarDropdown">             
+              {% if upgrade %}
+                  {% for item in upgrade %}
+                  <a class="dropdown-item" href="{%  url 'upgrade' item.id %} ">{{item.title}}</a> 
+                  {% endfor %}                  
+              {% endif %}
+            </div>
+          </li>
+          <br>
+          <li class="nav-item dropdown" style="list-style: none;">
+            <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Downgrade
+            </a>
+            <div class="dropdown-menu mt-2"  style="background: powderblue;" aria-labelledby="navbarDropdown">             
+              {% if downgrade %}
+                  {% for item in downgrade %}
+                  <a class="dropdown-item" href="{%  url 'downgrade' item.id %} ">{{item.title}}</a> 
+                  {% endfor %}                  
+              {% endif %}
+            </div>
+          </li>
+    </ul>
+    <div class="row">
+        {% if wood %}
+            {% for item in wood %}
+                <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-3 mt-3 w-25">
+                    <div class="card w-100 text-center pt-3">
+                        <img src="{{item.image.url}}" class="card-img-top w-100">
+                        <a href=" "><h5 class="card-title">{{item.name}}</h5>
+                        <div class="card-body mt-3">
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-3 mb-3 mt-3 w-25"></div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<!-- content section done -->
+
+    
+{% endblock content %}
+    
+  
